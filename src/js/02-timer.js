@@ -11,6 +11,15 @@ const options = {
     },
 };
 
+const timerEl = {
+    inputDateTimePickerEl: document.querySelector('#datetime-picker'),
+    buttonStartEl : document.querySelector('button[data-start]'),
+    daysEl: document.querySelector('.value[data-days]'),
+    hoursEl: document.querySelector('.value[data-hours]'),
+    minutesEl: document.querySelector('.value[data-minutes]'),
+    secondsEl : document.querySelector('.value[data-seconds]'),
+}
+
 function convertMs(ms) {
   // Number of milliseconds per unit of time
     const second = 1000;
