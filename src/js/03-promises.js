@@ -3,7 +3,7 @@ import Notiflix from 'notiflix';
 Notiflix.Notify.init({
 width: '300px',
   position: 'center-top',
-distance: '100px',
+distance: '120px',
 cssAnimationStyle: 'zoom',
 fontSize: '15px',
 failure: {
@@ -28,7 +28,7 @@ const formObj = {
 formObj.form.addEventListener('submit', onFormSubmit)
 
 function onFormSubmit(event) {
-  console.log(event);
+  // console.log(event);
   event.preventDefault();
   const firstDelay = Number(event.target.delay.value);
   const step = Number(event.target.step.value);

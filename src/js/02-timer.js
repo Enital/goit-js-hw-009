@@ -16,18 +16,18 @@ failure: {
     },
 });
 
+const inputDateTimePickerEl = document.querySelector('#datetime-picker');
+const buttonStartEl = document.querySelector('button[data-start]');
 const timerObj = {
-    inputDateTimePickerEl: document.querySelector('#datetime-picker'),
-    buttonStartEl : document.querySelector('button[data-start]'),
-    daysEl: document.querySelector('.value[data-days]'),
-    hoursEl: document.querySelector('.value[data-hours]'),
-    minutesEl: document.querySelector('.value[data-minutes]'),
-    secondsEl : document.querySelector('.value[data-seconds]'),
+    daysEl: document.querySelector('[data-days]'),
+    hoursEl: document.querySelector('[data-hours]'),
+    minutesEl: document.querySelector('[data-minutes]'),
+    secondsEl : document.querySelector('[data-seconds]'),
 }
 
 let eventDate = null;
 let intervalId = null;
-timerObj.buttonStartEl.disabled = true;
+buttonStartEl.disabled = true;
 
 const options = {
     enableTime: true,
@@ -38,23 +38,23 @@ const options = {
         console.log(selectedDates[0]);
         if (options.defaultDate.getTime() > selectedDates[0].getTime()) {
             Notiflix.Notify.failure('Please choose a date in the future');
-    timerObj.buttonStartEl.disabled = true;    
+    buttonStartEl.disabled = true;    
 return
     }
-        timerObj.buttonStartEl.disabled = false;
+        buttonStartEl.disabled = false;
     eventDate = selectedDates[0].getTime();
-    timerObj.buttonStartEl.classList.add('button-is-active');
+    buttonStartEl.classList.add('button-is-active');
     },
 };
-flatpickr(timerObj.inputDateTimePickerEl, options)
+flatpickr(inputDateTimePickerEl, options)
 
 
-timerObj.buttonStartEl.addEventListener('click', handleButtonStartElClick);
-function handleButtonStartElClick(event) {
-    timerObj.inputDateTimePickerEl.nextElementSibling.classList.remove('overlay');
-    timerObj.inputDateTimePickerEl.style.borderColor='black';
+buttonStartEl.addEventListener('click', handleButtonStartElClick);
+function handleButtonStartElClick() {
+    inputDateTimePickerEl.nextElementSibling.classList.remove('overlay');
+    inputDateTimePickerEl.style.borderColor='black';
     intervalId=setInterval(showTimeLeft, 1000);
-    showTimeLeft()
+    // showTimeLeft()
 }
 
 function convertMs(ms) {
@@ -76,26 +76,24 @@ function convertMs(ms) {
 }
 
 function addLeadingZero(value) {
-    let valueToString = value.toString();
-    return  valueToString.padStart(2, 0)
+    return  value.toString().padStart(2, 0)
 }
 
 function showTimeLeft() {
-    timerObj.inputDateTimePickerEl.disabled = true;
-    timerObj.buttonStartEl.disabled = true;
+    inputDateTimePickerEl.disabled = true;
+    buttonStartEl.disabled = true;
 
-        const dateNow = Date.now();
-        let timeLeftInMs =eventDate-dateNow ;
-        
-        const timeLeftInArray = convertMs(timeLeftInMs);
-        const { days, hours, minutes, seconds }=timeLeftInArray
-        timerObj.daysEl.textContent = days;
-        timerObj.hoursEl.textContent = hours;
-        timerObj.minutesEl.textContent = minutes;
-        timerObj.secondsEl.textContent = seconds;
-        if (days==='00' && hours==='00' && minutes==='00' && seconds==='00') {
-            clearInterval(intervalId);
-            Notiflix.Report.success('The timer is off.','Believe in yourself and good things will happen to you',);
-            return
-        }
+    const dateNow = Date.now();
+    let timeLeftInMs =eventDate-dateNow ;
+    const timeLeftInArray = convertMs(timeLeftInMs);
+    const { days, hours, minutes, seconds }=timeLeftInArray
+    timerObj.daysEl.textContent = days;
+    timerObj.hoursEl.textContent = hours;
+    timerObj.minutesEl.textContent = minutes;
+    timerObj.secondsEl.textContent = seconds;
+    if (days==='00' && hours==='00' && minutes==='00' && seconds==='00') {
+        clearInterval(intervalId);
+        Notiflix.Report.success('The timer is off.','Believe in yourself and good things will happen to you',);
+        return
     }
+}
