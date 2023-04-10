@@ -1,53 +1,21 @@
-// import { Notify } from 'notiflix/build/notiflix-notify-aio';
-// const formEl = document.querySelector('.form');
-
-// formEl.addEventListener('submit', handleFormElSubmit)
-
-// function handleFormElSubmit(event) {
-//   event.preventDefault();
-//   const inputFirstDelayValue = Number(event.target.elements.delay.value);
-//   const inputStepValue = Number(event.target.elements.step.value);
-//   const inputAmountValue = Number(event.target.elements.amount.value);
-  
-//   for (let i = 1; i <= inputAmountValue; i += 1) {
-//     let currentDelay = inputFirstDelayValue + (i - 1) * inputStepValue;
-  
-//     createPromise(i, currentDelay).then(({ position, delay }) => {
-//       Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`,
-//         {
-//           // opacity: '0.9',
-//           timeout: 3000,
-//           backOverlay: false,
-//           clickToClose: 'true',
-    
-//         });
-//   })
-//       .catch(({ position, delay }) => {
-//         Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`,
-//           {
-//           // opacity: '0.9',
-//           timeout: 3000,
-//           clickToClose: 'true',
-//         });
-//   }); 
-//   }
-// }
-
-// function createPromise(position, delay) {
-//   const shouldResolve = Math.random() > 0.3;
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       if (shouldResolve) {
-//         resolve({ position, delay })
-//       } else {
-//         reject({ position, delay })
-//       }
-//     }, delay);
-//   }
-//   );
-// }
-
 import Notiflix from 'notiflix';
+
+Notiflix.Notify.init({
+width: '300px',
+  position: 'center-top',
+distance: '100px',
+cssAnimationStyle: 'zoom',
+fontSize: '15px',
+failure: {
+    notiflixIconColor: 'rgba(230,230,230,0.95)',
+    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
+    },
+success: {
+    background: '#3DA35D',
+    notiflixIconColor: 'rgba(230,230,230,0.95)',
+    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
+}
+});
 
 const formObj = {
   form: document.querySelector('.form'),
