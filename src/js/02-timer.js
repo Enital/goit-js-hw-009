@@ -6,8 +6,8 @@ import "notiflix/dist/notiflix-3.2.6.min.css"
 Notiflix.Notify.init({
 width: '300px',
 position: 'center-top',
-cssAnimationStyle: 'zoom',
-fontSize: '15px',
+// cssAnimationStyle: 'zoom',
+fontSize: '16px',
 failure: {
     notiflixIconColor: 'rgba(230,230,230,0.95)',
     fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
@@ -16,8 +16,8 @@ failure: {
     },
 });
 
-const inputDateTimePickerEl = document.querySelector('#datetime-picker');
-const buttonStartEl = document.querySelector('button[data-start]');
+const inputDateEl = document.querySelector('#datetime-picker');
+const buttonStartEl = document.querySelector('[data-start]');
 const timerObj = {
     daysEl: document.querySelector('[data-days]'),
     hoursEl: document.querySelector('[data-hours]'),
@@ -35,27 +35,15 @@ const options = {
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-        console.log(selectedDates[0]);
-        if (options.defaultDate.getTime() > selectedDates[0].getTime()) {
+        // console.log(selectedDates[0]);
+        if (Date.now() > selectedDates[0]) {
             Notiflix.Notify.failure('Please choose a date in the future');
-    buttonStartEl.disabled = true;    
-return
+        } else {
+            buttonStartEl.disabled = false;
+            eventDate = selectedDates[0];
+        };
     }
-        buttonStartEl.disabled = false;
-    eventDate = selectedDates[0].getTime();
-    buttonStartEl.classList.add('button-is-active');
-    },
 };
-flatpickr(inputDateTimePickerEl, options)
-
-
-buttonStartEl.addEventListener('click', handleButtonStartElClick);
-function handleButtonStartElClick() {
-    inputDateTimePickerEl.nextElementSibling.classList.remove('overlay');
-    inputDateTimePickerEl.style.borderColor='black';
-    intervalId=setInterval(showTimeLeft, 1000);
-    // showTimeLeft()
-}
 
 function convertMs(ms) {
     const second = 1000;
@@ -75,12 +63,23 @@ function convertMs(ms) {
     return { days, hours, minutes, seconds };
 }
 
+flatpickr(inputDateEl, options)
+
+buttonStartEl.addEventListener('click', handleButtonStartElClick);
+
+function handleButtonStartElClick() {
+    inputDateEl.nextElementSibling.classList.remove('overlay');
+    inputDateEl.style.borderColor='black';
+    intervalId=setInterval(showTimeLeft, 1000);
+    // showTimeLeft()
+}
+
 function addLeadingZero(value) {
     return  value.toString().padStart(2, 0)
 }
 
 function showTimeLeft() {
-    inputDateTimePickerEl.disabled = true;
+    inputDateEl.disabled = true;
     buttonStartEl.disabled = true;
 
     const dateNow = Date.now();

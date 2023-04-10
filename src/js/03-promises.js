@@ -2,9 +2,9 @@ import Notiflix from 'notiflix';
 
 Notiflix.Notify.init({
 width: '300px',
-  position: 'center-top',
+position: 'center-top',
 distance: '120px',
-cssAnimationStyle: 'zoom',
+// cssAnimationStyle: 'zoom',
 fontSize: '15px',
 failure: {
     notiflixIconColor: 'rgba(230,230,230,0.95)',
