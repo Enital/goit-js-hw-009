@@ -35,7 +35,7 @@ const options = {
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-        // console.log(selectedDates[0]);
+        console.log(selectedDates[0]);
         if (Date.now() > selectedDates[0]) {
             Notiflix.Notify.failure('Please choose a date in the future');
         } else {
