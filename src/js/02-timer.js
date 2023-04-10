@@ -71,7 +71,6 @@ function handleButtonStartElClick() {
     inputDateEl.nextElementSibling.classList.remove('overlay');
     inputDateEl.style.borderColor='black';
     intervalId=setInterval(showTimeLeft, 1000);
-    // showTimeLeft()
 }
 
 function addLeadingZero(value) {
@@ -83,7 +82,7 @@ function showTimeLeft() {
     buttonStartEl.disabled = true;
 
     const dateNow = Date.now();
-    let timeLeftInMs =eventDate-dateNow ;
+    let timeLeftInMs =eventDate - dateNow ;
     const timeLeftInArray = convertMs(timeLeftInMs);
     const { days, hours, minutes, seconds }=timeLeftInArray
     timerObj.daysEl.textContent = days;
