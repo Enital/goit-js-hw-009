@@ -24,5 +24,5 @@ buttonStopEl.addEventListener('click', () =>{
     clearInterval(timerId);
     buttonStopEl.disabled = true;
     buttonStartEl.disabled = false;
-    intervalId = 1;
+    timerId = 1;
 });
